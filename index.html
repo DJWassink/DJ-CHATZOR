@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'">
+    <title>DJ CHATZOR</title>
+
+    <style>
+      html, body {
+        margin: 0;
+        background: black;
+      }
+      #root {
+        display: flex;
+      }
+      #sidebar {
+        width: 75px;
+        height: 100vh;
+        background: #222;
+      }
+
+      #webviews-container {
+        width: calc(100vw - 75px);
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
+
+      #webviews-container > webview {
+        height: 100vh;
+        width: 100%;
+        position: absolute;
+        z-index: 0;
+        background: #1e1e1e;
+      }
+
+      #webviews-container > webview.active {
+        z-index: 100;
+      }
+
+      .service-button {
+        position: relative;
+        width: 55px;
+        height: 55px;
+        border: none;
+        background-color: rgba(255,255,255,.1);
+        border-radius: 3px;
+        margin: 5px 10px;
+        background-size: 70%;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        cursor: pointer;
+      }
+      .service-button:hover {
+        background-color: rgba(255,255,255,.2);
+      }
+
+      .service-button.active {
+        /* background-color: #656565;
+        border: 1px solid #999; */
+        background-color: rgba(255,255,255,.2);
+        border: 1px solid rgba(255,255,255,.25);
+      }
+
+      .badge {
+        box-sizing: border-box;
+        align-items: center;
+        background: #d9534f;
+        border-radius: 20px;
+        bottom: 5px;
+        color: #FFF;
+        font-size: 11px;
+        justify-content: center;
+        min-height: 17px;
+        min-width: 17px;
+        padding: 0px 5px;
+        position: absolute;
+        right: 5px;
+        display: none;
+      }
+
+      .badge.active {
+        display: flex;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root">
+      <div id="sidebar"></div>
+      <div id="webviews-container"></div>
+  </div>
+    <!-- You can also require other files to run in this process -->
+    <script src="./services.js"></script>
+    <script src="./dist/renderer.js"></script>
+    <script>
+      // const webviewsContainer = document.getElementById('webviews-container');
+      // const sidebar = document.getElementById('sidebar');
+
+      // services.forEach((service, index) => {
+      //   const webview = document.createElement('webview');
+
+      //   webview.classList.add(service.name);
+      //   if (index === 0) {
+      //     webview.classList.add()
+      //   }
+      //   webview.src = service.url;
+      //   webview.useragent = service.ua;
+      //   webview.autosize = "on";
+      //   webview.preload = "";
+      //   webview.partition="persist:service-" + service.uuid;
+      //   webview.allowpopups="on";
+
+      //   webviewsContainer.appendChild(webview);
+
+      //   const serviceButton = document.createElement('button');
+      //   serviceButton.classList.add('service-button');
+      //   if (index === 0) {
+      //     serviceButton.classList.add('active');
+      //   }
+      //   serviceButton.style.backgroundImage = 'url(' + service.icon + ')';
+      //   serviceButton.onclick = (e) => {
+      //     Array.from(document.getElementsByClassName('service-button')).forEach(btn => {
+      //       btn.classList.remove('active');
+      //     });
+      //     serviceButton.classList.add('active');
+      //     Array.from(document.getElementsByTagName('webview')).forEach(wv => {
+      //       wv.classList.remove('active');
+      //     });
+      //     webview.classList.add('active');
+      //   }
+
+      //   sidebar.appendChild(serviceButton);
+      // });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+{
+  "name": "dj-chatzor",
+  "version": "1.0.0",
+  "description": "A minimal Franz clone",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "start": "npm run build && electron ./dist/main.js",
+    "pack": "electron-builder --dir",
+    "dist": "del-cli ./dist && yarn build && electron-builder"
+  },
+  "main": "./dist/main.js",
+  "build": {
+    "extends": null,
+    "appId": "com.djwassink.chatzor",
+    "mac": {
+      "category": "public.app-category.productivity"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json",
+      "./index.html",
+      "./services.js",
+      "./service-icons/**/*",
+      "./service-recipes/**/*"
+    ],
+    "asarUnpack": [
+      "./services.js",
+      "./service-icons/**/*",
+      "./service-recipes/**/*"
+    ],
+    "linux": {
+      "target": [{
+        "target": "deb",
+        "arch": ["x64"]
+      }]
+    }
+  },
+  "repository": "https://github.com/DJWassink/DJ-CHATZOR",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo",
+    "typescript"
+  ],
+  "author": {
+    "name": "Dirk-Jan Wassink",
+    "email": "dirk.jan.wassink@gmail.com",
+    "url": "https://djwassink.com/"
+  },
+  "devDependencies": {
+    "del-cli": "^2.0.0",
+    "electron": "^6.0.1",
+    "electron-builder": "^21.2.0",
+    "typescript": "^3.5.3"
+  }
+}
