@@ -1,12 +1,15 @@
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
-window.addEventListener("DOMContentLoaded", () => {
-    const replaceText = (selector: string, text: string) => {
-        const element = document.getElementById(selector);
-        if (element) { element.innerText = text; }
-    };
+const {shell} = require('electron').remote;
 
-    for (const type of ["chrome", "node", "electron"]) {
-        replaceText(`${type}-version`, (process.versions as any)[type]);
+const ALLOWED_PROTOCOLS = [
+    'https:',
+    'http:',
+    'ftp:',
+];
+
+(window as any).openUrl = (url: string) => {
+    if (ALLOWED_PROTOCOLS.some(protocol => url.startsWith(protocol))) {
+        shell.openExternal(url);
     }
-});
+}

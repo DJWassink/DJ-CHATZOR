@@ -1,7 +1,6 @@
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
-
 interface Service  {
     uuid: string;
     name: string;
@@ -10,8 +9,6 @@ interface Service  {
     ua: string;
     recipe?: string;
 }
-
-console.log(window.location);
 
 const webviewsContainer = document.getElementById('webviews-container');
 const sidebar = document.getElementById('sidebar');
@@ -62,6 +59,11 @@ const sidebar = document.getElementById('sidebar');
     } else {
         serviceButtonBadge.classList.remove('active');
     }
+  })
+
+  webview.addEventListener('new-window', (e) => {
+    //calls the preload.ts
+    (window as any).openUrl(e.url);
   })
 
   sidebar.appendChild(serviceButton);
