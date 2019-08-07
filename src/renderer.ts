@@ -8,6 +8,7 @@ interface Service  {
     url: string;
     ua: string;
     recipe?: string;
+    css?: string;
 }
 
 const webviewsContainer = document.getElementById('webviews-container');
@@ -26,6 +27,13 @@ const sidebar = document.getElementById('sidebar');
   webview.setAttribute('allowpopups', "on");
   if (service.recipe) {
     webview.setAttribute('preload', service.recipe);
+  }
+
+  if (service.css) {
+    webview.addEventListener('dom-ready', () => {
+      webview.insertCSS(service.css);
+      webview.getWebContents().executeJavaScript(`document.body.classList.add('darkTheme')`);
+    });
   }
 
   webviewsContainer.appendChild(webview);
