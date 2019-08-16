@@ -39,6 +39,7 @@ const sidebar = document.getElementById('sidebar');
   webviewsContainer.appendChild(webview);
 
   const serviceButton = document.createElement('button');
+  serviceButton.setAttribute('title', service.name);
   serviceButton.classList.add('service-button');
   if (index === 0) {
     serviceButton.classList.add('active');
