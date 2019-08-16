@@ -3,13 +3,29 @@
   "version": "1.0.0",
   "description": "A minimal Franz clone",
   "scripts": {
+    "precommit": "lint-staged",
     "build": "tsc",
     "watch": "tsc -w",
     "start": "npm run build && electron ./dist/main.js",
     "pack": "electron-builder --dir",
-    "dist": "del-cli ./dist && yarn build && electron-builder"
+    "dist": "del-cli ./dist && yarn build && electron-builder",
+    "test": "yarn lint",
+    "lint": "./node_modules/.bin/tslint -c ./tslint.json --project ./tsconfig.json",
+    "lint:fix": "./node_modules/.bin/tslint -c ./tslint.json --project ./tsconfig.json --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,scss,md,graphl}\" --ignore-path .gitignore"
   },
   "main": "./dist/main.js",
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "tslint -c ./tslint.json",
+      "git add"
+    ],
+    "*.{json,css,scss,md,graphl,js,jsx}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "build": {
     "extends": null,
     "appId": "com.djwassink.chatzor",
@@ -30,10 +46,14 @@
       "./service-recipes/**/*"
     ],
     "linux": {
-      "target": [{
-        "target": "deb",
-        "arch": ["x64"]
-      }]
+      "target": [
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
     }
   },
   "repository": "https://github.com/DJWassink/DJ-CHATZOR",
@@ -54,6 +74,12 @@
     "del-cli": "^2.0.0",
     "electron": "^6.0.1",
     "electron-builder": "^21.2.0",
+    "husky": "^3.0.3",
+    "lint-staged": "^9.2.1",
+    "prettier": "^1.18.2",
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-eslint-rules": "^5.4.0",
     "typescript": "^3.5.3"
   }
 }
