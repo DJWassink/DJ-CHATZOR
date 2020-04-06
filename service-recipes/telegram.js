@@ -18,3 +18,7 @@ setInterval(() => {
 
   ipcRenderer.sendToHost("", count);
 }, 1000);
+
+window.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("darkTheme");
+});

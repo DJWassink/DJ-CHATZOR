@@ -1,12 +1,9 @@
 const { ipcRenderer } = require("electron");
 
 setInterval(() => {
-  const direct = document.querySelectorAll(
-    '[class^="guildsWrapper"] [class*="badge"]'
-  ).length;
-  const indirect = document.querySelectorAll(
-    '[class^="guildsWrapper"] [class^="guild-"]+[class*="unread-"]'
+  const count = document.querySelectorAll(
+    '*[class^="wrapper-"] *[class^="numberBadge-"]'
   ).length;
 
-  ipcRenderer.sendToHost("", direct);
+  ipcRenderer.sendToHost("", count);
 }, 1000);

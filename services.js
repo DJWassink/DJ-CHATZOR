@@ -11,7 +11,7 @@ window.services = [
             width: 100% !important;
             height: 100% !important;
             top: 0 !important;
-        }`
+        }`,
   },
   {
     uuid: "6ca69566-b8ed-11e9-a2a3-2a2ae2dbcce4",
@@ -20,7 +20,7 @@ window.services = [
     recipe: "./service-recipes/slack.js",
     url: "https://label305.slack.com/",
     ua:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.87 Safari/537.36"
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.87 Safari/537.36",
   },
   {
     uuid: "6ca69588-b8ed-11e9-a2a3-2a2ae2dbcce4",
@@ -183,7 +183,7 @@ window.services = [
           .darkTheme .dropdown-menu {
               background-color: #4d4d4d !important;
               border-color: #5d5d5d;
-          }`
+          }`,
   },
   {
     uuid: "6ca69599-b8ed-11e9-a2a3-2a2ae2dbcce4",
@@ -192,6 +192,6 @@ window.services = [
     recipe: "./service-recipes/discord.js",
     url: "https://discordapp.com/channels/@me",
     ua:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.87 Safari/537.36"
-  }
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.87 Safari/537.36",
+  },
 ];

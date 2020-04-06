@@ -6,8 +6,10 @@ let mainWindow: Electron.BrowserWindow;
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        height: 600,
-        width: 800,
+        height: 720,
+        width: 1280,
+        minHeight: 600,
+        minWidth: 800,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             webviewTag: true,

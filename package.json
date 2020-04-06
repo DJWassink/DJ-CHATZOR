@@ -1,9 +1,8 @@
 {
   "name": "dj-chatzor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A minimal Franz clone",
   "scripts": {
-    "precommit": "lint-staged",
     "build": "tsc",
     "watch": "tsc -w",
     "start": "npm run build && electron ./dist/main.js",
@@ -15,15 +14,18 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,scss,md,graphl}\" --ignore-path .gitignore"
   },
   "main": "./dist/main.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
     "*.{ts,tsx}": [
       "prettier --write",
-      "tslint -c ./tslint.json",
-      "git add"
+      "tslint -c ./tslint.json"
     ],
     "*.{json,css,scss,md,graphl,js,jsx}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "build": {
@@ -71,15 +73,15 @@
     "url": "https://djwassink.com/"
   },
   "devDependencies": {
-    "del-cli": "^2.0.0",
-    "electron": "^6.0.1",
-    "electron-builder": "^21.2.0",
-    "husky": "^3.0.3",
-    "lint-staged": "^9.2.1",
-    "prettier": "^1.18.2",
-    "tslint": "^5.18.0",
+    "del-cli": "^3.0.0",
+    "electron": "^8.2.0",
+    "electron-builder": "^22.4.1",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.1.2",
+    "prettier": "^2.0.3",
+    "tslint": "^6.1.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-eslint-rules": "^5.4.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.8.3"
   }
 }

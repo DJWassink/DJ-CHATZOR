@@ -23,7 +23,11 @@ const sidebar = document.getElementById('sidebar');
     }
     webview.src = service.url;
     webview.useragent = service.ua;
+    webview.setAttribute('useragent', service.ua);
+
     webview.partition = 'persist:service-' + service.uuid;
+    webview.setAttribute('partition', 'persist:service-' + service.uuid);
+
     webview.setAttribute('allowpopups', 'on');
     if (service.recipe) {
         webview.setAttribute('preload', service.recipe);
@@ -32,7 +36,6 @@ const sidebar = document.getElementById('sidebar');
     if (service.css) {
         webview.addEventListener('dom-ready', () => {
             webview.insertCSS(service.css);
-            webview.getWebContents().executeJavaScript(`document.body.classList.add('darkTheme')`);
         });
     }
 
@@ -46,11 +49,11 @@ const sidebar = document.getElementById('sidebar');
     }
     serviceButton.style.backgroundImage = 'url(' + service.icon + ')';
     serviceButton.onclick = () => {
-        Array.from(document.getElementsByClassName('service-button')).forEach(btn => {
+        Array.from(document.getElementsByClassName('service-button')).forEach((btn) => {
             btn.classList.remove('active');
         });
         serviceButton.classList.add('active');
-        Array.from(document.getElementsByTagName('webview')).forEach(wv => {
+        Array.from(document.getElementsByTagName('webview')).forEach((wv) => {
             wv.classList.remove('active');
         });
         webview.classList.add('active');
@@ -60,7 +63,7 @@ const sidebar = document.getElementById('sidebar');
     serviceButtonBadge.classList.add('badge');
     serviceButton.appendChild(serviceButtonBadge);
 
-    webview.addEventListener('ipc-message', event => {
+    webview.addEventListener('ipc-message', (event) => {
         const count = event.args[0];
         if (count && count > 0) {
             serviceButtonBadge.classList.add('active');
@@ -70,7 +73,7 @@ const sidebar = document.getElementById('sidebar');
         }
     });
 
-    webview.addEventListener('new-window', e => {
+    webview.addEventListener('new-window', (e) => {
         //calls the preload.ts
         (window as any).openUrl(e.url);
     });
