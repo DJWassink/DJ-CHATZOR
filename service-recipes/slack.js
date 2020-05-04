@@ -14,4 +14,5 @@ setInterval(() => {
   ).length;
 
   ipcRenderer.sendToHost("", directMessages);
+  ipcRenderer.send("count", "slack", directMessages);
 }, 1000);

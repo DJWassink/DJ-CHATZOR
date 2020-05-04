@@ -6,4 +6,5 @@ setInterval(() => {
   ).length;
 
   ipcRenderer.sendToHost("", count);
+  ipcRenderer.send("count", "discord", count);
 }, 1000);

@@ -13,7 +13,6 @@ interface Service {
 
 const webviewsContainer = document.getElementById('webviews-container');
 const sidebar = document.getElementById('sidebar');
-
 ((window as any).services as Service[]).forEach((service, index) => {
     const webview = document.createElement('webview');
 

@@ -18,6 +18,7 @@ setInterval(() => {
       ).length > 0
   );
   ipcRenderer.sendToHost("", containersWithBadges.length);
+  ipcRenderer.send("count", "whatsapp", containersWithBadges.length);
 }, 1000);
 
 window.addEventListener("DOMContentLoaded", () => {

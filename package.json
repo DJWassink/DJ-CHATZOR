@@ -40,7 +40,8 @@
       "./index.html",
       "./services.js",
       "./service-icons/**/*",
-      "./service-recipes/**/*"
+      "./service-recipes/**/*",
+      "./read-icons/**/*"
     ],
     "asarUnpack": [
       "./services.js",

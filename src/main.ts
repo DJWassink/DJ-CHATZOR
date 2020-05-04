@@ -1,5 +1,6 @@
-import {app, BrowserWindow} from 'electron';
+import {app, BrowserWindow, ipcMain, nativeImage} from 'electron';
 import * as path from 'path';
+import * as fs from 'fs';
 
 let mainWindow: Electron.BrowserWindow;
 
@@ -55,3 +56,16 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app"s specific main process
 // code. You can also put them in separate files and require them here.
+
+const countMap = new Map<string, number>();
+ipcMain.on('count', (event, serviceName, count) => {
+    countMap.set(serviceName, count);
+    const totalCounts = Array.from(countMap.values()).reduce((acc, value) => acc + value, 0);
+    if (totalCounts > 0) {
+        const img = nativeImage.createFromPath(path.join(__dirname, '../read-icons/unread-icon.png'));
+        mainWindow.setIcon(img);
+    } else {
+        const img = nativeImage.createFromPath(path.join(__dirname, '../read-icons/normal-icon.png'));
+        mainWindow.setIcon(img);
+    }
+});

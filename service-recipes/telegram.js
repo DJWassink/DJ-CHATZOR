@@ -17,6 +17,7 @@ setInterval(() => {
   }
 
   ipcRenderer.sendToHost("", count);
+  ipcRenderer.send("count", "telegram", count);
 }, 1000);
 
 window.addEventListener("DOMContentLoaded", () => {
