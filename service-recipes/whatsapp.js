@@ -23,6 +23,9 @@ setInterval(() => {
 
 window.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("dark");
+  setTimeout(() => {
+    document.body.classList.add("dark");
+  }, 5000);
 });
 
 //Below we check every second if whatsapp cries about chrome version, if so reload the page while clearing session data
