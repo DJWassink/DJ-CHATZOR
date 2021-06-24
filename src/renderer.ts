@@ -72,10 +72,5 @@ const sidebar = document.getElementById('sidebar');
         }
     });
 
-    webview.addEventListener('new-window', (e) => {
-        //calls the preload.ts
-        (window as any).openUrl(e.url);
-    });
-
     sidebar.appendChild(serviceButton);
 });

@@ -1,8 +1,8 @@
-import {app, BrowserWindow, ipcMain, nativeImage} from 'electron';
 import * as path from 'path';
-import * as fs from 'fs';
 
-let mainWindow: Electron.BrowserWindow;
+import {BrowserWindow, app, ipcMain, nativeImage, shell} from 'electron';
+
+let mainWindow: Electron.BrowserWindow | null = null;
 
 function createWindow() {
     // Create the browser window.
@@ -12,7 +12,6 @@ function createWindow() {
         minHeight: 600,
         minWidth: 800,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
             webviewTag: true,
         },
     });
@@ -29,6 +28,21 @@ function createWindow() {
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         mainWindow = null;
+    });
+
+    const ALLOWED_PROTOCOLS = ['https:', 'http:', 'ftp:'];
+    function isValidExternalUrl(url: string) {
+        return ALLOWED_PROTOCOLS.some((protocol) => url.startsWith(protocol));
+    }
+
+    mainWindow.webContents.on('did-attach-webview', (event, webContents) => {
+        webContents.setWindowOpenHandler((handler) => {
+            if (isValidExternalUrl(handler.url)) {
+                shell.openExternal(handler.url);
+                return {action: 'deny'};
+            }
+            return {action: 'allow'};
+        });
     });
 }
 
@@ -59,6 +73,10 @@ app.on('activate', () => {
 
 const countMap = new Map<string, number>();
 ipcMain.on('count', (event, serviceName, count) => {
+    if (mainWindow === null) {
+        return;
+    }
+
     countMap.set(serviceName, count);
     const totalCounts = Array.from(countMap.values()).reduce((acc, value) => acc + value, 0);
     if (totalCounts > 0) {
